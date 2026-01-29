@@ -10,9 +10,20 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 // MongoDB Connection
-mongoose.connect(process.env.MONGODB_URI)
-  .then(() => console.log('MongoDB connected'))
-  .catch(err => console.log('MongoDB connection error:', err));
+const mongoUri = process.env.MONGODB_URI || 'mongodb+srv://root:15478110@smart-white-board.5bqfpna.mongodb.net/URL?retryWrites=true&w=majority';
+
+if (!mongoUri) {
+  console.error('MONGODB_URI environment variable is not defined');
+  process.exit(1);
+}
+
+console.log('Attempting to connect to MongoDB...');
+mongoose.connect(mongoUri)
+  .then(() => console.log('MongoDB connected successfully'))
+  .catch(err => {
+    console.error('MongoDB connection error:', err.message);
+    process.exit(1);
+  });
 
 // CORS configuration for production
 const corsOptions = {
