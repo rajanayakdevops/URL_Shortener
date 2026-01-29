@@ -3,6 +3,11 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
+  base: '/',           // important for correct asset paths
+  publicDir: 'public', // ensures assets are copied
+  build: {
+    outDir: 'dist'
+  },
   server: {
     proxy: {
       '/api': {
@@ -11,9 +16,5 @@ export default defineConfig({
         secure: false
       }
     }
-  },
-  build: {
-    outDir: 'dist',
-    sourcemap: false
   }
 })
