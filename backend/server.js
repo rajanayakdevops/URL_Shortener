@@ -1,16 +1,18 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
-const connectDB = require('./config/database');
+const mongoose = require('mongoose');
 const Url = require('./models/Url');
 const { generateUniqueCode } = require('./utils/hashUtils');
 const { validateShortCode } = require('./utils/validationUtils');
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3001;
 
-// Connect to MongoDB
-connectDB();
+// MongoDB Connection
+mongoose.connect(process.env.MONGODB_URI)
+  .then(() => console.log('MongoDB connected'))
+  .catch(err => console.log('MongoDB connection error:', err));
 
 // CORS configuration for production
 const corsOptions = {
