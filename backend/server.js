@@ -28,6 +28,22 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json());
 
+// Root endpoint - Backend status and database connection
+app.get('/', (req, res) => {
+  const dbStatus = mongoose.connection.readyState === 1 ? 'Connected' : 'Disconnected';
+  
+  res.json({
+    message: 'URL Shortener Backend is running! 🚀',
+    status: 'OK',
+    database: {
+      status: dbStatus,
+      name: 'MongoDB Atlas - URL Database'
+    },
+    port: PORT,
+    timestamp: new Date().toISOString()
+  });
+});
+
 // Health check endpoint
 app.get('/health', (req, res) => {
   res.json({ status: 'OK', message: 'URL Shortener API is running' });
