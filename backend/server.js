@@ -12,8 +12,24 @@ const PORT = process.env.PORT || 5000;
 // Connect to MongoDB
 connectDB();
 
-app.use(cors());
+// CORS configuration for production
+const corsOptions = {
+  origin: [
+    'http://localhost:5173', // Local development
+    'https://url-shortener-frontend.onrender.com', // Production frontend
+    /\.onrender\.com$/ // Allow all Render subdomains
+  ],
+  credentials: true,
+  optionsSuccessStatus: 200
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
+
+// Health check endpoint
+app.get('/health', (req, res) => {
+  res.json({ status: 'OK', message: 'URL Shortener API is running' });
+});
 
 // Shorten URL endpoint
 app.post('/api/shorten', async (req, res) => {
@@ -41,7 +57,7 @@ app.post('/api/shorten', async (req, res) => {
     };
     
     const shortCode = await generateUniqueCode(originalUrl, checkExists);
-    const shortUrl = `${process.env.BASE_URL}/${shortCode}`;
+    const shortUrl = `${process.env.BASE_URL || `http://localhost:${PORT}`}/${shortCode}`;
     
     // Save to database
     const newUrl = new Url({

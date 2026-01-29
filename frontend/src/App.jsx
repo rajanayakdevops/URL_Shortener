@@ -2,6 +2,12 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 import './App.css'
 
+// API Base URL - uses environment variable
+const API_BASE_URL = import.meta.env.VITE_API_URL || ''
+
+// Configure axios defaults
+axios.defaults.baseURL = API_BASE_URL
+
 // Browser cache utilities
 const CACHE_KEY = 'urlShortenerCache'
 const CACHE_TTL = 60 * 60 * 1000 // 1 hour
