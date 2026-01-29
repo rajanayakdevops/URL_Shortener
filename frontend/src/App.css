@@ -1,0 +1,79 @@
+.App {
+  text-align: center;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+h1 {
+  color: #333;
+  margin-bottom: 30px;
+}
+
+.url-form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 30px;
+  justify-content: center;
+}
+
+.url-form input {
+  flex: 1;
+  max-width: 400px;
+  padding: 12px;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.url-form button {
+  padding: 12px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.url-form button:hover {
+  background-color: #0056b3;
+}
+
+.url-form button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.urls-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.url-item {
+  background-color: #f8f9fa;
+  padding: 15px;
+  border-radius: 5px;
+  border: 1px solid #e9ecef;
+  text-align: left;
+}
+
+.original-url, .short-url {
+  margin: 5px 0;
+  word-break: break-all;
+}
+
+.short-url a {
+  color: #007bff;
+  text-decoration: none;
+  margin-left: 10px;
+}
+
+.short-url a:hover {
+  text-decoration: underline;
+}
